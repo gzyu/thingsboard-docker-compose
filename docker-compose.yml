@@ -1,0 +1,214 @@
+version: '2.2'
+services:
+  pg-0:
+    restart: always
+    image: docker.io/bitnami/postgresql-repmgr:14
+    container_name: pg-0
+    ports:
+      - 5432:5432
+    volumes:
+      - pg_0_data:/bitnami/postgresql
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: secret
+      POSTGRESQL_USERNAME: thingsboard
+      POSTGRESQL_PASSWORD: P@ssw0rd
+      POSTGRESQL_DATABASE: thingsboard
+      REPMGR_PASSWORD: repmgrpassword
+      REPMGR_PRIMARY_HOST: pg-0
+      REPMGR_PRIMARY_PORT: 5432
+      REPMGR_PARTNER_NODES: pg-0,pg-1,pg-2,pg-3:5432
+      REPMGR_NODE_NAME: pg-0
+      REPMGR_NODE_NETWORK_NAME: pg-0
+      REPMGR_PORT_NUMBER: 5432
+  pg-1:
+    restart: always
+    image: docker.io/bitnami/postgresql-repmgr:14
+    container_name: pg-1
+    depends_on:
+      - pg-0
+    ports:
+      - 5432
+    volumes:
+      - pg_1_data:/bitnami/postgresql
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: secret
+      POSTGRESQL_USERNAME: thingsboard
+      POSTGRESQL_PASSWORD: P@ssw0rd
+      POSTGRESQL_DATABASE: thingsboard
+      REPMGR_PASSWORD: repmgrpassword
+      REPMGR_PRIMARY_HOST: pg-0
+      REPMGR_PRIMARY_PORT: 5432
+      REPMGR_PARTNER_NODES: pg-0,pg-1,pg-2,pg-3:5432
+      REPMGR_NODE_NAME: pg-1
+      REPMGR_NODE_NETWORK_NAME: pg-1
+      REPMGR_PORT_NUMBER: 5432
+  pg-2:
+    restart: always
+    image: docker.io/bitnami/postgresql-repmgr:14
+    container_name: pg-2
+    depends_on:
+      - pg-0
+    ports:
+      - 5432
+    volumes:
+      - pg_2_data:/bitnami/postgresql
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: secret
+      POSTGRESQL_USERNAME: thingsboard
+      POSTGRESQL_PASSWORD: P@ssw0rd
+      POSTGRESQL_DATABASE: thingsboard
+      REPMGR_PASSWORD: repmgrpassword
+      REPMGR_PRIMARY_HOST: pg-0
+      REPMGR_PRIMARY_PORT: 5432
+      REPMGR_PARTNER_NODES: pg-0,pg-1,pg-2,pg-3:5432
+      REPMGR_NODE_NAME: pg-2
+      REPMGR_NODE_NETWORK_NAME: pg-2
+      REPMGR_PORT_NUMBER: 5432
+  pg-3:
+    restart: always
+    image: docker.io/bitnami/postgresql-repmgr:14
+    container_name: pg-3
+    depends_on:
+      - pg-0
+    ports:
+      - 5432
+    volumes:
+      - pg_3_data:/bitnami/postgresql
+    environment:
+      POSTGRESQL_POSTGRES_PASSWORD: secret
+      POSTGRESQL_USERNAME: thingsboard
+      POSTGRESQL_PASSWORD: P@ssw0rd
+      POSTGRESQL_DATABASE: thingsboard
+      REPMGR_PASSWORD: repmgrpassword
+      REPMGR_PRIMARY_HOST: pg-0
+      REPMGR_PRIMARY_PORT: 5432
+      REPMGR_PARTNER_NODES: pg-0,pg-1,pg-2,pg-3:5432
+      REPMGR_NODE_NAME: pg-3
+      REPMGR_NODE_NETWORK_NAME: pg-3
+      REPMGR_PORT_NUMBER: 5432
+  pg-backup:
+    image: ubcctlt/barman
+    container_name: pg-backup
+    depends_on:
+      - pg-0
+      - pg-1
+      - pg-2
+      - pg-3
+    environment:
+      REPLICATION_USER: repmgr # default is replication_user
+      REPLICATION_PASSWORD: repmgrpassword # default is replication_pass
+      REPLICATION_HOST: pg-0
+      POSTGRES_USER: thingsboard
+      POSTGRES_PASSWORD: P@ssw0rd
+      POSTGRES_DB: thingsboard
+      SSH_ENABLE: 1
+      BACKUP_SCHEDULE: "*/0 */6 * * *"
+    volumes:
+      - ~/.pg-backup:/var/backups
+      - ./ssh:/tmp/.ssh/keys
+  zookeeper:
+    restart: always
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper
+    ports:
+      - "2181:2181"
+    volumes:
+      - zookeeper_data:/bitnami
+    environment:
+      ZOO_ENABLE_AUTH: "yes"
+      ZOO_SERVER_USERS: kafka
+      ZOO_SERVER_PASSWORDS: P@ssw0rd
+      ZOO_SERVER_ID: 1
+      ZOO_SERVERS: zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+  zookeeper2:
+    restart: always
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper2
+    ports:
+      - "2182:2181"
+    volumes:
+      - zookeeper2_data:/bitnami
+    environment:
+      ZOO_ENABLE_AUTH: "yes"
+      ZOO_SERVER_USERS: kafka
+      ZOO_SERVER_PASSWORDS: P@ssw0rd
+      ZOO_SERVER_ID: 2
+      ZOO_SERVERS: zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+  zookeeper3:
+    restart: always
+    image: docker.io/bitnami/zookeeper:3.8
+    container_name: zookeeper3
+    ports:
+      - "2183:2181"
+    volumes:
+      - zookeeper3_data:/bitnami
+    environment:
+      ZOO_ENABLE_AUTH: "yes"
+      ZOO_SERVER_USERS: kafka
+      ZOO_SERVER_PASSWORDS: P@ssw0rd
+      ZOO_SERVER_ID: 3
+      ZOO_SERVERS: zookeeper:2888:3888,zookeeper2:2888:3888,zookeeper3:2888:3888
+  kafka:
+    restart: always
+    image: wurstmeister/kafka
+    container_name: kafka
+    depends_on:
+      - zookeeper
+      - zookeeper2
+      - zookeeper3
+    ports:
+      - "9092:9092"
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_USER: kafka
+      KAFKA_ZOOKEEPER_PASSWORD: P@ssw0rd
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181,zookeeper2:2182,zookeeper3:2183
+      KAFKA_LISTENERS: INSIDE://:9093,OUTSIDE://:9092
+      KAFKA_ADVERTISED_LISTENERS: INSIDE://:9093,OUTSIDE://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INSIDE:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INSIDE
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+  thingsboard:
+    restart: always
+    image: thingsboard/tb-postgres
+    container_name: thingsboard
+    depends_on:
+      - pg-backup
+      - kafka
+    ports:
+      - "8080:9090"
+      - "1883:1883"
+      - "7070:7070"
+      - "5683-5688:5683-5688/udp"
+    environment:
+      TB_QUEUE_TYPE: kafka
+      TB_KAFKA_SERVERS: kafka:9092
+      DATABASE_ENTITIES_TYPE: sql
+      DATABASE_TS_TYPE: sql
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.PostgreSQLDialect
+      SPRING_DRIVER_CLASS_NAME: org.postgresql.Driver
+      SPRING_DATASOURCE_MAXIMUM_POOL_SIZE: 5
+      SQL_POSTGRES_TS_KV_PARTITIONING: MONTHS
+      SPRING_DATASOURCE_URL: jdbc:postgresql://pg-0:5432/thingsboard
+      SPRING_DATASOURCE_USERNAME: thingsboard
+      SPRING_DATASOURCE_PASSWORD: P@ssw0rd
+    volumes:
+      - ~/.mytb-data:/data
+      - ~/.mytb-logs:/var/log/thingsboard
+# Setup the volumes
+volumes:
+  zookeeper_data:
+    driver: local
+  zookeeper2_data:
+    driver: local
+  zookeeper3_data:
+    driver: local
+  pg_0_data:
+    driver: local
+  pg_1_data:
+    driver: local
+  pg_2_data:
+    driver: local
+  pg_3_data:
+    driver: local
