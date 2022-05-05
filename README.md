@@ -4,15 +4,15 @@
 
 using Postgres HA Cluster + Zookeeper Cluster + Apache Kafka
 
-[![Thingsboard Docker Compose](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKRVO4XYC56SZPTH4QYTTV64A)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKRVO4XYC56SZPTH4QYTTV64A)
+[![Thingsboard Docker Compose](https://imgur.com/vy88908.png)](https://imgur.com/vy88908.png)
 
 ## PostgreSQL Architecture
 
-[![PostgreSQL Architecture](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALLBQZJOAVYADSQNAKYYTTV66Q)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALLBQZJOAVYADSQNAKYYTTV66Q)
+[![PostgreSQL Architecture](https://imgur.com/jlnDiBe.png)](https://imgur.com/jlnDiBe.png)
 
 ## Thingsboard with Apache Kafka
 
-[![Thingsboard with Apache Kafka](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)
+[![Thingsboard with Apache Kafka](https://imgur.com/xbLDQjx.png)](https://imgur.com/xbLDQjx.png)
 
 Verify the deployment by navigating to your server address in
 your preferred browser.
