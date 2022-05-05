@@ -14,6 +14,13 @@ using Postgres HA Cluster + Zookeeper Cluster + Apache Kafka
 
 [![Thingsboard with Apache Kafka](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)
 
+Verify the deployment by navigating to your server address in
+your preferred browser.
+
+```sh
+http://127.0.0.1:8080
+```
+
 ## Port using
 
 - 2181-2183:2181 - connect local port 2181-2183 to exposed internal Zookeeper port 2181
