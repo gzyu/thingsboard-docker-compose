@@ -4,15 +4,15 @@
 
 using Postgres HA Cluster + Zookeeper Cluster + Apache Kafka
 
-[![Thingsboard Docker Compose](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKLXQ3XJV5TYFW6YGOYTTVUKQ)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKLXQ3XJV5TYFW6YGOYTTVUKQ)
+[![Thingsboard Docker Compose](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKRVO4XYC56SZPTH4QYTTV64A)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_docker-compose.png?token=GHSAT0AAAAAABT2IALKRVO4XYC56SZPTH4QYTTV64A)
 
 ## PostgreSQL Architecture
 
-[![PostgreSQL Architecture](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALKPYFH7Q7CYG6S6LPOYTTVXFA)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALKPYFH7Q7CYG6S6LPOYTTVXFA)
+[![PostgreSQL Architecture](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALLBQZJOAVYADSQNAKYYTTV66Q)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_postgres_arch.png?token=GHSAT0AAAAAABT2IALLBQZJOAVYADSQNAKYYTTV66Q)
 
 ## Thingsboard with Apache Kafka
 
-[![Thingsboard with Apache Kafka](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLM4UCNY5DBVLQP6WAYTTVYGA)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLM4UCNY5DBVLQP6WAYTTVYGA)
+[![Thingsboard with Apache Kafka](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)](https://raw.githubusercontent.com/Stream-I-T-Consulting/thingsboard-docker-compose/main/thingsboard_kafka.png?token=GHSAT0AAAAAABT2IALLPPP6O3YLXQHN7FDQYTTV65A)
 
 ## Port using
 
